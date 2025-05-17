@@ -27,3 +27,15 @@ services:
     image: redis:latest
     ports:
       - 6389:6379
+
+  s3:
+    image: minio/minio
+    ports:
+      - 9000:9000
+      - 9001:9001
+    environment:
+      MINIO_ROOT_USER: root
+      MINIO_ROOT_PASSWORD: password
+    command: server --console-address ":9001" /data
+    volumes:
+      - ./docker/minio/data:/data
